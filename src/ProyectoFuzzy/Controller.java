@@ -10,13 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
-import java.text.DecimalFormat;
 import java.util.Random;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
-import net.sourceforge.jFuzzyLogic.rule.Variable;
-
 public class Controller {
     public Label tiempo;
     public Label dificultad;
@@ -41,7 +37,7 @@ public class Controller {
 
 
 
-    public void generarEjercicio(ActionEvent actionEvent) {
+    public void generarEjercicio() {
 
         switch (estado){
             case INICIAL:
@@ -68,11 +64,11 @@ public class Controller {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                estado = Estado.INICIAL;
-                errores = 0;
-                ayudas = 0;
+                reinicializarComp();
+                generarEjercicio();
         }
     }
+
 
     public void obtenerDificultad() throws Exception{
         String filename = "tipper.fcl";
@@ -112,6 +108,7 @@ public class Controller {
                     dif = Dificultad.DIFICIL;
             }
         }
+        System.out.println("La dificultad es: "+ n);
     }
 
     private void mostrarValoresFin() {
@@ -206,7 +203,7 @@ public class Controller {
 
 
         }
-        return suma == res;
+        return suma == res && verificarCarry();
     }
 
     private String numero(){
@@ -225,6 +222,7 @@ public class Controller {
     }
 
     private void ajustarComponentes(){
+        btnAyuda.setVisible(true);
         switch (dif){
             case FACIL:
                 dificultad.setText("  FACIL");
@@ -476,6 +474,128 @@ public class Controller {
         }
     }
 
+    public boolean verificarCarry( ) {
+        int num = 0;
+        switch (dif){
+            case FACIL:
+                num = Integer.parseInt(t9.getText())+ Integer.parseInt(t3.getText());
+                if (indicarErrorResp(r4,num))
+                    return false;
+                if (indicarErrorCarry(t16,num))
+                    return false;
+                if (t16.getText().equals(""))
+                    num = Integer.parseInt(t10.getText())+ Integer.parseInt(t4.getText());
+                else
+                    num = Integer.parseInt(t16.getText())+ Integer.parseInt(t10.getText())+ Integer.parseInt(t4.getText());
+
+                if (indicarErrorResp(r3,num))
+                    return false;
+                if (num > 9) {
+                    num =Integer.parseInt( String.valueOf(num).substring(0,1));
+                    if (indicarErrorResp(r2,num))
+                        return false;
+                }
+
+                break;
+            case REGULAR:
+
+                num = Integer.parseInt(t9.getText())+ Integer.parseInt(t3.getText());
+                if (indicarErrorResp(r4,num))
+                    return false;
+                if (indicarErrorCarry(t16,num))
+                    return false;
+
+                if (t16.getText().equals(""))
+                    num = Integer.parseInt(t10.getText())+ Integer.parseInt(t4.getText());
+                else
+                    num = Integer.parseInt(t16.getText())+ Integer.parseInt(t10.getText())+ Integer.parseInt(t4.getText());
+
+                if (indicarErrorResp(r3,num))
+                    return false;
+
+                if (indicarErrorCarry(t17,num))
+                    return false;
+
+                if (t17.getText().equals(""))
+                    num = Integer.parseInt(t11.getText())+ Integer.parseInt(t5.getText());
+                else
+                    num = Integer.parseInt(t17.getText())+ Integer.parseInt(t11.getText())+ Integer.parseInt(t5.getText());
+
+                if (indicarErrorResp(r2,num))
+                    return false;
+
+                if (num > 9) {
+                    num =Integer.parseInt( String.valueOf(num).substring(0,1));
+                    if (indicarErrorResp(r1,num))
+                        return false;
+                }
+                break;
+            case DIFICIL:
+                num = Integer.parseInt(t13.getText())+Integer.parseInt(t7.getText())+ Integer.parseInt(t1.getText());
+                if (indicarErrorResp(r6,num))
+                    return false;
+                if (indicarErrorCarry(t20,num))
+                    return false;
+
+                if (t20.getText().equals(""))
+                    num = Integer.parseInt(t14.getText()) + Integer.parseInt(t8.getText())+ Integer.parseInt(t2.getText());
+                else
+                    num = Integer.parseInt(t20.getText()) + Integer.parseInt(t14.getText()) + Integer.parseInt(t8.getText())+ Integer.parseInt(t2.getText());
+
+                if (indicarErrorResp(r5,num))
+                    return false;
+                if (indicarErrorCarry(t21,num))
+                    return false;
+
+                if (t21.getText().equals(""))
+                    num = Integer.parseInt(t15.getText())+Integer.parseInt(t9.getText())+ Integer.parseInt(t3.getText());
+                else
+                    num = Integer.parseInt(t21.getText()) + Integer.parseInt(t15.getText())+Integer.parseInt(t9.getText())+ Integer.parseInt(t3.getText());
+
+                if (indicarErrorResp(r4,num))
+                    return false;
+                if (indicarErrorCarry(t22,num))
+                    return false;
+
+                if (t22.getText().equals(""))
+                    num = Integer.parseInt(t16.getText())+Integer.parseInt(t10.getText())+ Integer.parseInt(t4.getText());
+                else
+                    num =Integer.parseInt(t22.getText()) + Integer.parseInt(t16.getText())+Integer.parseInt(t10.getText())+ Integer.parseInt(t4.getText());
+
+                if (indicarErrorResp(r3,num))
+                    return false;
+                if (indicarErrorCarry(t23,num))
+                    return false;
+
+                if (t23.getText().equals(""))
+                    num = Integer.parseInt(t17.getText())+Integer.parseInt(t11.getText())+ Integer.parseInt(t5.getText());
+                else
+                    num =Integer.parseInt(t23.getText())+ Integer.parseInt(t17.getText())+Integer.parseInt(t11.getText())+ Integer.parseInt(t5.getText());
+
+
+                if (indicarErrorResp(r2,num))
+                    return false;
+                if (indicarErrorCarry(t24,num))
+                    return false;
+
+                if (t24.getText().equals(""))
+                    num = Integer.parseInt(t18.getText())+Integer.parseInt(t12.getText())+ Integer.parseInt(t6.getText());
+                else
+                    num =Integer.parseInt(t24.getText())+Integer.parseInt(t18.getText())+Integer.parseInt(t12.getText())+ Integer.parseInt(t6.getText());
+
+                if (indicarErrorResp(r1,num))
+                    return false;
+                if (num > 9) {
+                    num =Integer.parseInt( String.valueOf(num).substring(0,1));
+                    if (indicarErrorResp(r0,num))
+                        return false;
+                }
+
+                break;
+        }
+        return true;
+    }
+
     public boolean indicarErrorCarry(TextField t, int num){
         if (num > 9){
             if (!t.getText().equals("")){
@@ -520,5 +640,44 @@ public class Controller {
         textField.setStyle("");
     }
 
+    private void reinicializarComp(){
+        estado = Estado.INICIAL;
+        correctImage.setVisible(false);
+        labelAyudas.setText("0");
+        tiempo.setText("");
+        errores = 0;
+        ayudas = 0;
+        r0.clear();
+        r1.clear();
+        r2.clear();
+        r3.clear();
+        r4.clear();
+        r5.clear();
+        r6.clear();
+        t1.clear();
+        t2.clear();
+        t3.clear();
+        t4.clear();
+        t5.clear();
+        t6.clear();
+        t7.clear();
+        t8.clear();
+        t9.clear();
+        t10.clear();
+        t11.clear();
+        t12.clear();
+        t13.clear();
+        t14.clear();
+        t15.clear();
+        t16.clear();
+        t17.clear();
+        t18.clear();
+        t19.clear();
+        t20.clear();
+        t21.clear();
+        t22.clear();
+        t23.clear();
+        t24.clear();
+    }
 
 }

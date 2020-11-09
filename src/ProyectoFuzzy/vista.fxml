@@ -13,7 +13,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Label fx:id="dificultad" layoutX="115.0" layoutY="19.0" prefHeight="20.0" prefWidth="56.0">
+        <Label fx:id="dificultad" layoutX="115.0" layoutY="19.0" prefHeight="20.0" prefWidth="78.0">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -175,7 +175,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="labelAyudas" layoutX="264.0" layoutY="17.0" prefHeight="20.0" prefWidth="47.0">
+      <Label fx:id="labelAyudas" layoutX="264.0" layoutY="17.0" prefHeight="20.0" prefWidth="21.0" text="0">
          <font>
             <Font size="14.0" />
          </font></Label>
