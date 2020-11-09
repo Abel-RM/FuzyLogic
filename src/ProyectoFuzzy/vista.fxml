@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="369.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProyectoFuzzy.Controller">
+    <Pane prefHeight="485.0" prefWidth="616.0">
+        <Button fx:id="flogic" layoutX="538.0" layoutY="14.0" mnemonicParsing="false" text="Flogic" />
+        <Label layoutX="34.0" layoutY="18.0" text="DIFICULTAD:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="dificultad" layoutX="115.0" layoutY="19.0" prefHeight="20.0" prefWidth="56.0">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <Label layoutX="352.0" layoutY="20.0" text="TIEMPO:  ">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="tiempo" layoutX="408.0" layoutY="20.0" prefHeight="20.0" prefWidth="78.0">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <Pane fx:id="barraSuma" layoutX="41.0" layoutY="302.0" prefHeight="3.0" prefWidth="531.0" style="-fx-background-color: gray;" />
+        <Button fx:id="btnAyuda" disable="true" layoutX="35.0" layoutY="409.0" mnemonicParsing="false" onAction="#obtenerAyuda" prefHeight="40.0" prefWidth="122.0" text="AYUDA">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnSiguiente" layoutX="449.0" layoutY="409.0" mnemonicParsing="false" onAction="#generarEjercicio" prefHeight="40.0" prefWidth="122.0" text="EMPEZAR">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+        <TextField fx:id="r0" alignment="CENTER" layoutX="56.0" layoutY="315.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+            <font>
+                <Font size="18.0" />
+            </font></TextField>
+        <TextField fx:id="r6" alignment="CENTER" layoutX="492.0" layoutY="315.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+            <font>
+                <Font size="18.0" />
+            </font></TextField>
+        <TextField fx:id="r5" alignment="CENTER" layoutX="417.0" layoutY="315.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="r4" alignment="CENTER" layoutX="342.0" layoutY="315.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="r3" alignment="CENTER" layoutX="267.0" layoutY="315.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="r2" alignment="CENTER" layoutX="192.0" layoutY="315.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="r1" alignment="CENTER" layoutX="117.0" layoutY="315.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t7" alignment="CENTER" layoutX="492.0" layoutY="187.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t8" alignment="CENTER" layoutX="417.0" layoutY="187.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t9" alignment="CENTER" layoutX="342.0" layoutY="187.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t10" alignment="CENTER" layoutX="267.0" layoutY="187.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t11" alignment="CENTER" layoutX="192.0" layoutY="187.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t12" alignment="CENTER" layoutX="117.0" layoutY="187.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t18" alignment="CENTER" layoutX="117.0" layoutY="130.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t17" alignment="CENTER" layoutX="192.0" layoutY="130.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t16" alignment="CENTER" layoutX="267.0" layoutY="130.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t15" alignment="CENTER" layoutX="342.0" layoutY="130.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t14" alignment="CENTER" layoutX="417.0" layoutY="130.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t13" alignment="CENTER" layoutX="492.0" layoutY="130.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t19" alignment="CENTER" layoutX="492.0" layoutY="78.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t20" alignment="CENTER" layoutX="417.0" layoutY="78.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t21" alignment="CENTER" layoutX="342.0" layoutY="78.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t22" alignment="CENTER" layoutX="267.0" layoutY="78.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t23" alignment="CENTER" layoutX="192.0" layoutY="78.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+        <TextField fx:id="t24" alignment="CENTER" layoutX="117.0" layoutY="78.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="t6" alignment="CENTER" layoutX="118.0" layoutY="244.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="t5" alignment="CENTER" layoutX="192.0" layoutY="244.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="t4" alignment="CENTER" layoutX="267.0" layoutY="244.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="t3" alignment="CENTER" layoutX="342.0" layoutY="244.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="t2" alignment="CENTER" layoutX="417.0" layoutY="244.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="t1" alignment="CENTER" layoutX="492.0" layoutY="244.0" onKeyTyped="#maximoChar" onMouseClicked="#cambiarStyle" prefHeight="40.0" prefWidth="40.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label fx:id="simPlus" contentDisplay="CENTER" layoutX="70.0" layoutY="249.0" text="+">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="correctImage" fitHeight="200.0" fitWidth="200.0" layoutX="210.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../icon/correct.png" />
+         </image></ImageView>
+      <Label layoutX="204.0" layoutY="17.0" text="AYUDAS:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelAyudas" layoutX="264.0" layoutY="17.0" prefHeight="20.0" prefWidth="47.0">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+    </Pane>
+</AnchorPane>
