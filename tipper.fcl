@@ -11,9 +11,9 @@ VAR_OUTPUT				// Define output variable
 END_VAR
 
 FUZZIFY tiempo			// Fuzzify input variable 'tiempo': {'poor', 'good' , 'excellent'}
-	TERM rapido := (0, 1) (30,0);
-	TERM regular := (25, 0) (30, 1) (33,1)(38,0);
-	TERM lento := (33, 0) (180, 1);
+	TERM rapido := (0, 1) (20,0);
+	TERM regular := (10, 0) (30, 1)(45,0);
+	TERM lento := (35, 0) (60, 1);
 END_FUZZIFY
 
 FUZZIFY errores			// Fuzzify input variable 'errores': { 'rancid', 'delicious' }

@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="369.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProyectoFuzzy.Controller">
     <Pane prefHeight="485.0" prefWidth="616.0">
-        <Button fx:id="flogic" layoutX="538.0" layoutY="14.0" mnemonicParsing="false" text="Flogic" />
+        <Button fx:id="flogic" layoutX="554.0" layoutY="15.0" mnemonicParsing="false" onAction="#mostrarGraficas" text="Flogic" />
         <Label layoutX="34.0" layoutY="18.0" text="DIFICULTAD:">
             <font>
                 <Font size="14.0" />
@@ -17,12 +17,12 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-        <Label layoutX="352.0" layoutY="20.0" text="TIEMPO:  ">
+        <Label layoutX="434.0" layoutY="18.0" text="TIEMPO:  ">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <Label fx:id="tiempo" layoutX="408.0" layoutY="20.0" prefHeight="20.0" prefWidth="78.0">
+        <Label fx:id="tiempo" layoutX="491.0" layoutY="18.0" prefHeight="20.0" prefWidth="60.0">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -170,14 +170,25 @@
          <image>
             <Image url="@../icon/correct.png" />
          </image></ImageView>
-      <Label layoutX="204.0" layoutY="17.0" text="AYUDAS:">
+      <Label layoutX="241.0" layoutY="20.0" text="AYUDAS">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="labelAyudas" layoutX="264.0" layoutY="17.0" prefHeight="20.0" prefWidth="21.0" text="0">
+      <Label fx:id="labelAyudas" layoutX="264.0" layoutY="39.0" prefHeight="20.0" prefWidth="21.0" text="0">
          <font>
             <Font size="14.0" />
          </font></Label>
+      <Label layoutX="315.0" layoutY="20.0" text="ERRORES">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Pane layoutX="306.0" layoutY="21.0" prefHeight="34.0" prefWidth="2.0" style="-fx-background-color: black;" />
+      <Label fx:id="labelErrores" layoutX="337.0" layoutY="39.0" text="0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
     </Pane>
 </AnchorPane>

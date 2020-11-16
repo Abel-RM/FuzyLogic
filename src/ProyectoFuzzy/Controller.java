@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import java.util.Random;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
+import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
+
 public class Controller {
     public Label tiempo;
     public Label dificultad;
@@ -34,11 +36,11 @@ public class Controller {
     private long horaFin = 0;
     private Dificultad dif = Dificultad.FACIL;
     private Estado estado = Estado.INICIAL;
+    public Label labelErrores;
 
-
+    public static FunctionBlock fb;
 
     public void generarEjercicio() {
-
         switch (estado){
             case INICIAL:
                 estado = Estado.CURSO;
@@ -51,6 +53,7 @@ public class Controller {
                 Alert alert = new Alert(Alert.AlertType.NONE, "La respuesta es incorrecta, sigue intentando", ButtonType.OK);
                 if(!validarSuma()){
                     errores++;
+                    labelErrores.setText(String.valueOf(errores));
                     alert.show();
                 }else{
                     horaFin = System.currentTimeMillis();
@@ -69,8 +72,7 @@ public class Controller {
         }
     }
 
-
-    public void obtenerDificultad() throws Exception{
+    public static void iniciarFuzzyLogic(){
         String filename = "tipper.fcl";
         FIS fis = FIS.load(filename, true);
 
@@ -80,7 +82,12 @@ public class Controller {
         }
 
         // Get default function block
-        FunctionBlock fb = fis.getFunctionBlock(null);
+        fb = fis.getFunctionBlock(null);
+        System.out.println("Se inicio");
+    }
+
+
+    public void obtenerDificultad() throws Exception{
 
         // Set inputs
         fb.setVariable("tiempo", time);
@@ -92,8 +99,6 @@ public class Controller {
         // Show output variable's chart
         fb.getVariable("nota").defuzzify();
 
-        // Print ruleSet
-        //System.out.println(fb);
         double n = fb.getVariable("nota").getValue();
         boolean subirDif = false;
         if (n>=70)
@@ -108,7 +113,7 @@ public class Controller {
                     dif = Dificultad.DIFICIL;
             }
         }
-        System.out.println("La dificultad es: "+ n);
+        System.out.println("La nota es: "+ n);
     }
 
     private void mostrarValoresFin() {
@@ -150,9 +155,14 @@ public class Controller {
         barraSuma.setVisible(false);
         simPlus.setVisible(false);
         correctImage.setVisible(true);
+
+
+
         int t = (int)((horaFin - horaInicio)/1000);
         time = t;
         tiempo.setText(" "+t+" seg");
+
+
     }
 
     private boolean validarSuma(){
@@ -481,7 +491,7 @@ public class Controller {
                 num = Integer.parseInt(t9.getText())+ Integer.parseInt(t3.getText());
                 if (indicarErrorResp(r4,num))
                     return false;
-                if (indicarErrorCarry(t16,num))
+                if (indicarErrorCarryTerm(t16,num))
                     return false;
                 if (t16.getText().equals(""))
                     num = Integer.parseInt(t10.getText())+ Integer.parseInt(t4.getText());
@@ -502,7 +512,7 @@ public class Controller {
                 num = Integer.parseInt(t9.getText())+ Integer.parseInt(t3.getText());
                 if (indicarErrorResp(r4,num))
                     return false;
-                if (indicarErrorCarry(t16,num))
+                if (indicarErrorCarryTerm(t16,num))
                     return false;
 
                 if (t16.getText().equals(""))
@@ -513,7 +523,7 @@ public class Controller {
                 if (indicarErrorResp(r3,num))
                     return false;
 
-                if (indicarErrorCarry(t17,num))
+                if (indicarErrorCarryTerm(t17,num))
                     return false;
 
                 if (t17.getText().equals(""))
@@ -534,7 +544,7 @@ public class Controller {
                 num = Integer.parseInt(t13.getText())+Integer.parseInt(t7.getText())+ Integer.parseInt(t1.getText());
                 if (indicarErrorResp(r6,num))
                     return false;
-                if (indicarErrorCarry(t20,num))
+                if (indicarErrorCarryTerm(t20,num))
                     return false;
 
                 if (t20.getText().equals(""))
@@ -544,7 +554,7 @@ public class Controller {
 
                 if (indicarErrorResp(r5,num))
                     return false;
-                if (indicarErrorCarry(t21,num))
+                if (indicarErrorCarryTerm(t21,num))
                     return false;
 
                 if (t21.getText().equals(""))
@@ -554,7 +564,7 @@ public class Controller {
 
                 if (indicarErrorResp(r4,num))
                     return false;
-                if (indicarErrorCarry(t22,num))
+                if (indicarErrorCarryTerm(t22,num))
                     return false;
 
                 if (t22.getText().equals(""))
@@ -564,7 +574,7 @@ public class Controller {
 
                 if (indicarErrorResp(r3,num))
                     return false;
-                if (indicarErrorCarry(t23,num))
+                if (indicarErrorCarryTerm(t23,num))
                     return false;
 
                 if (t23.getText().equals(""))
@@ -575,7 +585,7 @@ public class Controller {
 
                 if (indicarErrorResp(r2,num))
                     return false;
-                if (indicarErrorCarry(t24,num))
+                if (indicarErrorCarryTerm(t24,num))
                     return false;
 
                 if (t24.getText().equals(""))
@@ -595,6 +605,24 @@ public class Controller {
         }
         return true;
     }
+
+    public boolean indicarErrorCarryTerm(TextField t, int num){
+        if (num > 9){
+            if (!t.getText().equals("")){
+                if (String.valueOf(num).charAt(0) != t.getText().charAt(0)){
+                    return true;
+                }
+            } else{
+                return true;
+            }
+
+        }else
+        if (!t.getText().equals("")){
+            return true;
+        }
+        return false;
+    }
+    
 
     public boolean indicarErrorCarry(TextField t, int num){
         if (num > 9){
@@ -644,6 +672,7 @@ public class Controller {
         estado = Estado.INICIAL;
         correctImage.setVisible(false);
         labelAyudas.setText("0");
+        labelErrores.setText("0");
         tiempo.setText("");
         errores = 0;
         ayudas = 0;
@@ -680,4 +709,7 @@ public class Controller {
         t24.clear();
     }
 
+    public void mostrarGraficas(ActionEvent actionEvent) {
+        JFuzzyChart.get().chart(fb);
+    }
 }
