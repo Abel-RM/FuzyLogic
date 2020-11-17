@@ -707,6 +707,9 @@ public class Controller {
         t22.clear();
         t23.clear();
         t24.clear();
+
+        barraSuma.setVisible(true);
+        simPlus.setVisible(true);
     }
 
     public void mostrarGraficas(ActionEvent actionEvent) {
