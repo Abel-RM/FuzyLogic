@@ -205,6 +205,11 @@
             <Image url="@../icon/borrador.png" />
          </image>
       </ImageView>
+      <Label fx:id="emocionId" alignment="CENTER" layoutX="255.0" layoutY="380.0" prefHeight="27.0" prefWidth="122.0" textFill="#d7442a">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
 
     </Pane>
 </AnchorPane>

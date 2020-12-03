@@ -1,6 +1,7 @@
 package ProyectoFuzzy;
 import Models.Dificultad;
 import Models.Estado;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -10,11 +11,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Random;
+import java.util.Scanner;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
-
+import javafx.concurrent.Task;
 public class Controller {
     public Label tiempo;
     public Label dificultad;
@@ -28,7 +32,7 @@ public class Controller {
     public Label simPlus;
     public Pane barraSuma;
     public Label labelAyudas;
-
+    public Label emocionId;
     private int errores = 0;
     private int ayudas = 0;
     private int time = 0;
@@ -37,10 +41,30 @@ public class Controller {
     private Dificultad dif = Dificultad.FACIL;
     private Estado estado = Estado.INICIAL;
     public Label labelErrores;
-
     public static FunctionBlock fb;
+    Thread t;
+
+
+    Task task = new Task<Void>() {
+        @Override
+        public Void call() throws Exception {
+            while (true) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        emocionId.setText(leeDatos().toUpperCase());
+                    }
+                });
+                Thread.sleep(1000);
+            }
+        }
+    };
+
 
     public void generarEjercicio() {
+        t = new Thread(task);
+        t.setDaemon(true);
+        t.start();
         switch (estado){
             case INICIAL:
                 estado = Estado.CURSO;
@@ -59,6 +83,7 @@ public class Controller {
                     horaFin = System.currentTimeMillis();
                     mostrarValoresFin();
                     estado = Estado.TERMINADO;
+
                 }
                 break;
             case TERMINADO:
@@ -86,19 +111,62 @@ public class Controller {
         System.out.println("Se inicio");
     }
 
+    public static String leeDatos() {
+        try {
+            File myObj = new File("C:\\Users\\abely\\Desktop\\Maestria\\semestre 1\\Introducion IA\\Proyecto logica difusa\\src\\Reconicimiento-Emociones\\result.txt"); //Ruta al archivo donde se guarda la emoción
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if (data.isEmpty()) {
+                    break;
+                }
+                return data;
+
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Ocurrió un error.");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public void obtenerDificultad() throws Exception{
+        String emocion = leeDatos();
+        double numeEmocion = 0;
+
+        switch(emocion){
+            case "aburrido":
+                numeEmocion = 0.5;
+                break;
+            case "enganchado":
+                numeEmocion = 1.5;
+                break;
+            case "excitado":
+                numeEmocion = 2.5;
+                break;
+            case "concentrado":
+                numeEmocion = 3.5;
+                break;
+            case "interesado":
+                numeEmocion = 4.5;
+                break;
+            case "relajado":
+                numeEmocion = 5.5;
+        }
 
         // Set inputs
+        fb.setVariable("ayudas", ayudas);
         fb.setVariable("tiempo", time);
         fb.setVariable("errores", errores);
-        fb.setVariable("ayudas", ayudas);
+        fb.setVariable("emocion", numeEmocion);
         // Evaluate
         fb.evaluate();
 
         // Show output variable's chart
         fb.getVariable("nota").defuzzify();
-
+        System.out.println("La emocion es: "+leeDatos());
         double n = fb.getVariable("nota").getValue();
         boolean subirDif = false;
         if (n>=70)

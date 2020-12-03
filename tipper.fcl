@@ -4,6 +4,7 @@ VAR_INPUT				// Define input variables
 	tiempo : REAL;
 	errores : REAL;
 	ayudas	: REAL;
+	emocion	: REAL;
 END_VAR
 
 VAR_OUTPUT				// Define output variable
@@ -27,6 +28,12 @@ FUZZIFY ayudas			// Fuzzify input variable 'errores': { 'rancid', 'delicious' }
 	TERM muchas := (4,0) (10,1);
 END_FUZZIFY
 
+FUZZIFY emocion			// Fuzzify input variable 'errores': { 'rancid', 'delicious' }
+	TERM negativa := (0, 0) (1,1) (2,0) ;
+	TERM neutral := (1.5,0) (3,1) (4,0);
+	TERM positiva := (3.5,0) (5,1) (6,0);
+END_FUZZIFY
+
 DEFUZZIFY nota			// Defzzzify output variable 'nota' : {'cheap', 'average', 'generous' }
 	TERM insuficiente := (0,0) (30,1) (60,0);
 	TERM promedio := (40,0) (60,1) (80,0);
@@ -40,12 +47,15 @@ RULEBLOCK No1
 	ACT : MIN;			// Use 'min' activation method
 	ACCU : MAX;			// Use 'max' accumulation method
 
-	RULE 1 : IF errores IS muchos THEN nota IS insuficiente;
-	RULE 2 : IF tiempo IS lento THEN nota IS insuficiente;
-	RULE 3 : IF tiempo IS regular AND errores IS algunos AND ayudas IS algunas THEN nota IS promedio;
-	RULE 4 : IF tiempo IS regular AND errores IS algunos AND ayudas IS pocas THEN nota IS promedio;
-	RULE 5 : IF tiempo IS regular AND errores IS algunos AND ayudas IS algunas THEN nota IS promedio;
-	RULE 6 : IF tiempo IS rapido AND errores IS algunos AND ayudas IS pocas THEN nota IS buena;
+    RULE 1 : IF emocion is negativa THEN nota IS insuficiente;
+	RULE 2 : IF errores IS muchos THEN nota IS insuficiente;
+	RULE 3 : IF tiempo IS lento THEN nota IS insuficiente;
+	RULE 4 : IF tiempo IS regular AND errores IS algunos AND ayudas IS algunas THEN nota IS promedio;
+	RULE 5 : IF tiempo IS regular AND errores IS algunos AND ayudas IS algunas AND emocion is positiva THEN nota IS buena;
+	RULE 6 : IF tiempo IS regular AND errores IS algunos AND ayudas IS pocas AND emocion is positiva THEN nota IS buena;
+	RULE 7 : IF tiempo IS regular AND errores IS algunos AND ayudas IS algunas and emocion is neutral THEN nota IS promedio;
+	RULE 8 : IF tiempo IS regular AND errores IS algunos AND ayudas IS algunas and emocion is negativa THEN nota IS promedio;
+	RULE 9 : IF tiempo IS rapido AND errores IS algunos AND ayudas IS pocas AND emocion is positiva  THEN nota IS buena;
 
 END_RULEBLOCK
 
